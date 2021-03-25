@@ -16,13 +16,38 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <widget class="QListWidget" name="textWidget"/>
-    </item>
-    <item>
-     <widget class="QPushButton" name="clickButton">
-      <property name="text">
-       <string>PushButton</string>
+     <widget class="QStackedWidget" name="stackedWidget">
+      <property name="currentIndex">
+       <number>0</number>
       </property>
+      <widget class="QWidget" name="first_page">
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <widget class="QTextEdit" name="textEdit"/>
+        </item>
+        <item>
+         <widget class="QPushButton" name="clickButton">
+          <property name="text">
+           <string>Show Vocabulary</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="second_page">
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <item>
+         <widget class="QTableWidget" name="tableWidget"/>
+        </item>
+        <item>
+         <widget class="QPushButton" name="returnButton">
+          <property name="text">
+           <string>Add text</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
      </widget>
     </item>
    </layout>

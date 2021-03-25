@@ -4,6 +4,39 @@ from nltk.stem import PorterStemmer
 from nltk.stem.wordnet import WordNetLemmatizer
 
 
+class Dictionary():
+    data = []
+
+    def addDataFromText(self, text):
+        if not text:
+            return
+        tokenizer = nltk.RegexpTokenizer(r"\w+")
+        words = tokenizer.tokenize(text)
+
+        lemmatized = []
+        lem = WordNetLemmatizer()
+        for w in words:
+            lemmatized.append(lem.lemmatize(w))
+
+        freq = nltk.FreqDist(lemmatized)
+        tags = nltk.pos_tag(lemmatized)
+
+        for i in range(len(lemmatized)):
+            tupel = self.find(lemmatized[i])
+            tupel[1] += freq[lemmatized[i]]
+            tupel[2] = tags[i][1]
+
+    def setAtPosition(self, row, column, value):
+        self.data[row][column] = value
+
+    def find(self, word):
+        for tupl in self.data:
+            if tupl[0] == word:
+                return tupl
+        res = [word, 0, ""]
+        self.data.append(res)
+        return res
+
 
 def show_words():
     text = """Amy normally hated Monday mornings, but this year was different. Kamal was in her art class and she liked Kamal. She was waiting outside the classroom when her friend Tara arrived.
@@ -17,17 +50,4 @@ def show_words():
 Kamal and Grant arrived. “Hi Kamal!” said Tara. “Are you going to the Halloween disco tomorrow?” “Yes. Hi Amy,” Kamal said, smiling. “Do you want to come and see our paintings after school?” “I’m coming too!” Tara insisted.
 
     """
-    words = nltk.word_tokenize(text)
-    freq = nltk.FreqDist(words)
 
-    stemmed = []
-    stem = PorterStemmer()
-    lem = WordNetLemmatizer()
-    for w in words:
-        stemmed.append(lem.lemmatize(w))
-
-    print(freq.most_common(5))
-    print(nltk.pos_tag(stemmed))
-    # import matplotlib.pyplot as plt
-    # freq.plot(50, cumulative = False)
-    # plt.show()
