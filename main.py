@@ -20,18 +20,18 @@ class ExampleApp(QtWidgets.QMainWindow, design.Ui_MainWindow):
         self.stackedWidget.setCurrentWidget(self.first_page)
         self.tableWidget.setColumnCount(3)
         self.tableWidget.setRowCount(1)
-
         self.tableWidget.setHorizontalHeaderLabels(["Word", "Count", "Info"])
+        self.tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
 
         self.tableWidget.horizontalHeaderItem(0).setTextAlignment(Qt.AlignLeft)
         self.tableWidget.horizontalHeaderItem(1).setTextAlignment(Qt.AlignHCenter)
         self.tableWidget.horizontalHeaderItem(2).setTextAlignment(Qt.AlignRight)
-
-       # self.tableWidget.currentCellChanged.connect(self.on_cellChanged)
+        self.saveButton.clicked.connect(self.on_cellChanged)
 
     def updateTable(self):
         self.tableWidget.clear()
         self.tableWidget.setColumnCount(3)
+        self.tableWidget.setHorizontalHeaderLabels(["Word", "Count", "Info"])
         self.tableWidget.setRowCount(len(self.data.data))
         for row in range(len(self.data.data)):
             for column in range(len(self.data.data[row])):
@@ -39,11 +39,9 @@ class ExampleApp(QtWidgets.QMainWindow, design.Ui_MainWindow):
 
     @pyqtSlot()
     def on_cellChanged(self):
-        if type(self.tableWidget.currentItem()) is type(None):
-            return
-        a = self.tableWidget.currentItem().column()
-        b = self.tableWidget.currentItem().row()
-        self.data.setAtPosition(b, a, self.tableWidget.itemAt(b, a))
+        for row in range(len(self.data.data)):
+            print(self.tableWidget.item(row, 2).text())
+            self.data.setAtPosition(row, 2, self.tableWidget.item(row, 2).text())
 
     @pyqtSlot()
     def on_clickButton(self):

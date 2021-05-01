@@ -31,6 +31,8 @@ class Ui_MainWindow(object):
         self.clickButton = QtWidgets.QPushButton(self.first_page)
         self.clickButton.setObjectName("clickButton")
         self.verticalLayout_2.addWidget(self.clickButton)
+        self.saveButton = QtWidgets.QPushButton(self.first_page)
+        self.saveButton.setObjectName("saveButton")
         self.stackedWidget.addWidget(self.first_page)
         self.second_page = QtWidgets.QWidget()
         self.second_page.setObjectName("second_page")
@@ -41,6 +43,7 @@ class Ui_MainWindow(object):
         self.tableWidget.setColumnCount(0)
         self.tableWidget.setRowCount(0)
         self.verticalLayout_3.addWidget(self.tableWidget)
+        self.verticalLayout_3.addWidget(self.saveButton)
         self.returnButton = QtWidgets.QPushButton(self.second_page)
         self.returnButton.setObjectName("returnButton")
         self.verticalLayout_3.addWidget(self.returnButton)
@@ -56,4 +59,5 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.clickButton.setText(_translate("MainWindow", "Show Vocabulary"))
+        self.saveButton.setText(_translate("MainWindow", "Save Vocabulary"))
         self.returnButton.setText(_translate("MainWindow", "Add text"))
